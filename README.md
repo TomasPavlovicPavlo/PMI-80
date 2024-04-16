@@ -79,14 +79,16 @@ Example:
 You want to add following code to address 0x1C00
 
 ```none
-	Address		Data	Instruction
-	0x1C00		0x21	LXI	H, 2200h
-	0x1C01		0x00
-	0x1C02		0x22
+	[Address]	[Data]	[Instruction]
+	0x1C00		0x3E	MVI A,19h
+	0x1C01		0x19
+	0x1C02		0xCD	CALL 00ABh
+	0x1C03		0xAB	
+	0x1C04		0x00
 ```
 
 
-<img src="docs/display_example_.png" height="400" />
+<img src="docs/display_example_mem.png" height="600" />
 
 
 
