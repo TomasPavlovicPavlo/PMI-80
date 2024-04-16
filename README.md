@@ -26,7 +26,9 @@ Keys `RE` and `I` are directly connected to hardware, they do not generate any k
 ### Command  definition syntax
 
 - parameters in **<>** are mandatory
-- 
+- parameter **address** is 2 bytes long memory address entered in hexadecimal
+- parameter **data** is 1 byte long in hexadecimal
+
 ### `RE` - system initialization (RESET)
 When you press the `RE` key the system is initialized. Processor 8080A starts by reading instruction on address 0000h which means that **MONITOR** starts. **MONITOR** initializes, sets the stack pointer to the top and displays a welcome message:
 
@@ -90,7 +92,19 @@ You want to add following code to address 0x1C00
 
 <img src="docs/display_example_mem.png" height="600" />
 
+### `GO` - program execution
 
+Command:
+
+`EX` \<(address)\> `=`
+
+With `M` command you can execute program saved in RAM or ROM memory. When the comand is isued the following display should appear:
+
+<img src="docs/display_go_sign.png" height="30" />
+
+
+
+<img src="docs/display_example_go.png" height="600" />
 
 
 Solution:
