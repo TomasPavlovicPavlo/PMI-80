@@ -74,7 +74,17 @@ With `M` command you can view or modify the content of the memory space. When th
 
 Next to the 'M' sign is displayed last address. Now you can enter new address or keep current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to next address and modify data or skip to next address by pressing `=`.
 
-Example - :
+Example:
+
+You want to add following code to address 0x1C00
+
+```none
+	Address		Data	Instruction
+	0x1C00		0x21	LXI	H, 2200h
+	0x1C01		0x00
+	0x1C02		0x22
+```
+
 
 <img src="docs/display_example_.png" height="400" />
 
