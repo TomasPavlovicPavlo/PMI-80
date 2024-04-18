@@ -25,9 +25,10 @@ Keys `RE` and `I` are directly connected to hardware, they do not generate any k
 
 ### Command  definition syntax
 
-- parameters in **<>** are mandatory
+- parameters in **< >** are mandatory
 - parameter **address** is 2 bytes long memory address entered in hexadecimal
 - parameter **data** is 1 byte long in hexadecimal
+- parameters in **<( )>** are optional
 
 ### `RE` - system initialization (RESET)
 When you press the `RE` key the system is initialized. Processor 8080A starts by reading instruction on address 0000h which means that **MONITOR** starts. **MONITOR** initializes, sets the stack pointer to the top and displays a welcome message:
@@ -74,19 +75,21 @@ With `M` command you can view or modify the content of the memory space. When th
 
 <img src="docs/display_mem_sign.png" height="30" />
 
-Next to the 'M' sign is displayed last address. Now you can enter new address or keep current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to next address and modify data or skip to next address by pressing `=`.
+Next to the 'M' is displayed the last address. Now you can enter new address or keep the current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to next address and modify data or skip to next address by pressing `=`.
 
 Example:
 
-You want to add following code to address 0x1C00
+Enter following code to address 0x1C00. This code will also be used in the following text.
 
 ```none
 	[Address]	[Data]	[Instruction]
-	0x1C00		0x3E	MVI A,19h
-	0x1C01		0x19
-	0x1C02		0xCD	CALL 00ABh
-	0x1C03		0xAB	
-	0x1C04		0x00
+	0x1C00h		0x21	LXI H,2200h
+	0x1C01h		0x00
+	0x1C02h		0x22	
+	0x1C03h		0x11	LXI D,3300h
+	0x1C04h		0x00
+	0x1C05h		0x33
+	0x1C06h		0x76	HLT
 ```
 
 
@@ -98,19 +101,13 @@ Command:
 
 `EX` \<(address)\> `=`
 
-With `M` command you can execute program saved in RAM or ROM memory. When the comand is isued the following display should appear:
+With `EX` command you can execute the program saved in RAM or ROM memory. When the comand is isued the following display should appear:
 
-<img src="docs/display_go_sign.png" height="30" />
+<img src="docs/display_ex_sign.png" height="30" />
 
+Now you can modify address field like in previous example and then press `=`. 
+If you enter address 0x1C00 (and you have entered the code from previous example) then the diplay clears and `E` is displayed in the left corner. The processor left the MONITOR and is executing user code. It is possible to return from this state by pressing `RE` or `I` (if it is enabled and interrupt vector is entered). 
 
+<img src="docs/display_example_ex.png" height="150" />
 
-<img src="docs/display_example_go.png" height="600" />
-
-
-Solution:
-```none
-	LXI		H, 1D00h	; Nastavenie vyst. registra
-	SHLD 	1FFCh		;
-	MVI		A, 13h		;
-	CALL	CLEAR		; 
-```
+## MONITOR subroutines accesible by the user
