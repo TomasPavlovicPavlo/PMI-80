@@ -1,5 +1,6 @@
 # Educational single-board computer PMI-80
 
+PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key keypad from calculator.
 
 ## Description of MONITOR operating system
 
@@ -164,7 +165,7 @@ Solution:
 
 ### `ENTRY` address 0x0008
 
-This subroutine clears 9 bytes wide output buffer and writes one character to the 1st position of the 
+This subroutine 
 
 ### `TIN` address 0x0300
 
