@@ -1,5 +1,6 @@
 # Educational single-board computer PMI-80
 
+
 ## Description of MONITOR operating system
 
 MONITOR OS 
@@ -13,11 +14,14 @@ The RAM is divided to two areas:
 
 On the following image is the memory map:
 
+
 ![Memory map](docs/memory_map.png)
 
+Figure 1. PMI-80 Memory map and some MONITOR variables
 
 <img src="docs/character_table.png" height="200" />
 
+Table 1. Character codes saved in MONITOR
 
 ## MONITOR commands
 
@@ -46,8 +50,8 @@ The message can be confirmed by pressing any key. Then the '?' sign appears, whi
 
 ### `INT` - external interrupt
 
-By pressing the key `INT` you request external interrupt. If the external interrupt is enabled the processor jumps to the address 0x0038 and saves the return address to the stack (like by instruction 'RST 7').
-On the address 0x0038 is jump instruction to the address 0x1FE6 where the user must place its own interrupt vector to the interrupt routine. There are 3 byte left for this vector.
+By pressing the key `INT` you request an external interrupt. If the external interrupt is enabled the processor jumps to the address 0x0038 and saves the return address to the stack (like by instruction 'RST 7').
+On the address 0x0038 is a jump instruction to the address 0x1FE6 where the user must place its own interrupt vector to the interrupt routine. There are 3 bytes left for this vector.
 
 ### `REG` - CPU registers modification
 
@@ -55,11 +59,11 @@ Command:
 
 `R` \<register\> <(data)> `=`
 
-With `R` command you can view or modify the content of CPU registers. When the comand is isued the following display should appear:
+With `R` command you can view or modify the content of CPU registers. When the command is issued the following display should appear:
 
 <img src="docs/display_reg_sign.png" height="30" />
 
-Now you can press `A`, `B`, `D`, `8` or `9` to display content of corresponding register pair AF, BC, DE, HL, SP. Now you can also modify the register pair. By pressing `=` key you finish current register pair opperations and advance to the following register pair. After the SP regiter manipulation and presing `=` the MONITOR enters command waiting state with '?' display.
+Now you can press `A`, `B`, `D`, `8` or `9` to display the content of corresponding register pair AF, BC, DE, HL, SP. Now you can also modify the register pair. By pressing `=` key you finish the current register pair operations and advance to the following register pair. After the SP register manipulation and pressing `=` the MONITOR enters the command waiting state with '?' display.
 
 Example - registers examination and modification of BC to value 0x48AE:
 
@@ -71,15 +75,15 @@ Command:
 
 `M` \<(address)\> `=` <(data)> `=` ...
 
-With `M` command you can view or modify the content of the memory space. When the comand is isued the following display should appear:
+With `M` command you can view or modify the content of the memory space. When the command is issued the following display should appear:
 
 <img src="docs/display_mem_sign.png" height="30" />
 
-Next to the 'M' is displayed the last address. Now you can enter new address or keep the current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to next address and modify data or skip to next address by pressing `=`.
+Next to the 'M' is displayed the last address. Now you can enter a new address or keep the current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to the next address and modify data or skip to the next address by pressing `=`.
 
 Example:
 
-Enter following code to address 0x1C00. This code will also be used in the following text.
+Enter the following code to address 0x1C00. This code will also be used in the following text.
 
 ```none
 	[Address]	[Data]	[Instruction]
@@ -101,13 +105,82 @@ Command:
 
 `EX` \<(address)\> `=`
 
-With `EX` command you can execute the program saved in RAM or ROM memory. When the comand is isued the following display should appear:
+With `EX` command you can execute the program saved in RAM or ROM memory. When the command is issued the following display should appear:
 
 <img src="docs/display_ex_sign.png" height="30" />
 
-Now you can modify address field like in previous example and then press `=`. 
-If you enter address 0x1C00 (and you have entered the code from previous example) then the diplay clears and `E` is displayed in the left corner. The processor left the MONITOR and is executing user code. It is possible to return from this state by pressing `RE` or `I` (if it is enabled and interrupt vector is entered). 
+Now you can modify the address field like in the previous example and then press `=`. 
+If you enter address 0x1C00 (and you have entered the code from the previous example) then the display clears and `E` is displayed in the left corner. The processor left the MONITOR and is executing user code. It is possible to return from this state by pressing `RE` or `I` (if it is enabled and the interrupt vector is entered). 
 
 <img src="docs/display_example_ex.png" height="150" />
 
 ## MONITOR subroutines accesible by the user
+
+MONITOR contains subroutines accessible to the user, i.e. they can be called from the user code. All the MONITOR subroutines are called by the instruction CALL. Subroutines are listed in the following table.
+
+| Name | Adress | Function |
+| :---: | :---: | :--- |
+| CLEAR | 0x0AB | Clear display and print char to 1st place |
+| ENTRY | 0x0008 | Entry to the MONITOR |
+| TIN | 0x0300 | Read one byte from tape |
+| TOUT | 0x02D4 | Write one byte to tape |
+| OUTDA | 0x00F2 | Write one byte to output data register |
+| OUTAD | 0x00BB | Write two bytes to output address register |
+| MODDA | 0x00FB |  |
+| MODAD | 0x00D7 |  |
+| OUTKE | 0x0116 | Display string and wait for key |
+
+Table 2. List of MONITOR subroutines
+
+<!---
+<img src="docs/subprograms.png" height="250" />
+--->
+
+### `CLEAR` address 0x00AB
+
+This subroutine clears 9 bytes wide output buffer and writes one character to the 1st position of the display. The character must be stored in accumulator before calling CLEAR subroutine. Display buffer pointer is stored on address 0x1FFC.
+
+ - **Input:** 
+ 	- A = character to be displayed (according to the Table 1.)
+ 	- Display output buffer address saved in buffer pointer on address 0x1FFC
+	
+ - **Output:** 
+ 	- output buffer
+
+ - **Used registers:** 
+ 	- HL, DE, A
+
+Example:
+
+Output buffer is located on address 0x1D00. Clear it and print character 'P' on first position.
+
+Solution:
+```
+	LXI		H, 1D00h	; Output buffer address
+	SHLD	1FFC		; Save buffer address to pinter
+	MVI		A, 13h		; Character 'P' value
+	CALL	CLEAR
+```
+
+### `ENTRY` address 0x0008
+
+This subroutine clears 9 bytes wide output buffer and writes one character to the 1st position of the 
+
+### `TIN` address 0x0300
+
+This subroutine is used for reading one byte from tape recorder to the register C.
+
+ - **Input:** 
+ 	- data from tape recorder
+	
+ - **Output:** 
+ 	- register C
+
+ - **Used registers:** 
+ 	- BC, DE, A
+
+
+
+
+
+
