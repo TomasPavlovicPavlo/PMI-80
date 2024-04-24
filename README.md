@@ -169,9 +169,9 @@ Output buffer is located on address 0x1D00. Clear it and print character 'P' on 
 
 Solution:
 ```
-	LXI		H, 1D00h	; Output buffer address
+	LXI	H, 1D00h	; Output buffer address
 	SHLD	1FFC		; Save buffer address to pinter
-	MVI		A, 13h		; Character 'P' value
+	MVI	A, 13h		; Character 'P' value
 	CALL	CLEAR
 ```
 
