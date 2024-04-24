@@ -1,6 +1,18 @@
 # Educational single-board computer PMI-80
 
-PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key keypad from calculator.
+PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock hrequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
+
+The computer contained 10 integrated circuits:
+
+ - 1× MHB8080A (microprocessor, equivalent of Intel 8080)
+ - 1× MH8224 (clock and reset generator)
+ - 1× MH8228 (system controller and bus driver)
+ - 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
+ - 2× MHB2114 (SRAM 1024×4b)
+ - 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
+ - 1× MHB8255A (programmable peripheral interface)
+ - 1× MH1082 (decoder and driver of 7-segment LED display)
+ - 1× MH7400 (4× NAND)
 
 ## Description of MONITOR operating system
 
@@ -8,8 +20,8 @@ MONITOR OS
 
 ## Memory and interface addressing
 
-Chip select signals CS0, CS1 and CS7 are used to select onboard memories. CS0 selects ROM with MONITOR, CS1 selects user ROM and CS7 selects RAM.
-The RAM is divided to two areas:
+Chip select signals CS0, CS1 and CS7 are used to select onboard memories. CS0 selects ROM with MONITOR, CS1 selects user ROM and CS7 selects RWM.
+The RWM is divided to two areas:
  - 0x1C00 to 0x1FD8 for user
  - 0x1FD9 to 0x1FFF is reserved for MONITOR
 
@@ -106,7 +118,7 @@ Command:
 
 `EX` \<(address)\> `=`
 
-With `EX` command you can execute the program saved in RAM or ROM memory. When the command is issued the following display should appear:
+With `EX` command you can execute the program saved in RWM or ROM memory. When the command is issued the following display should appear:
 
 <img src="docs/display_ex_sign.png" height="30" />
 
