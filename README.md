@@ -2,6 +2,10 @@
 
 PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock hrequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
 
+<img src="docs/PMI-80.jpg" height="300" />
+
+Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=24581204
+
 The computer contained 10 integrated circuits:
 
  - 1× MHB8080A (microprocessor, equivalent of Intel 8080)
