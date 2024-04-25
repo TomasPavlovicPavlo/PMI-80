@@ -1,22 +1,24 @@
 # Educational single-board computer PMI-80
 
-PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock hrequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
+PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
 
 <img src="docs/PMI-80.jpg" height="300" />
 
 Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=24581204
 
-The computer contained 10 integrated circuits:
-
- - 1× MHB8080A (microprocessor, equivalent of Intel 8080)
- - 1× MH8224 (clock and reset generator)
- - 1× MH8228 (system controller and bus driver)
- - 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
- - 2× MHB2114 (SRAM 1024×4b)
- - 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
- - 1× MHB8255A (programmable peripheral interface)
- - 1× MH1082 (decoder and driver of 7-segment LED display)
- - 1× MH7400 (4× NAND)
+## Features
+- Integrated circuits:
+	 - 1× MHB8080A (microprocessor, equivalent of Intel 8080)
+ 	- 1× MH8224 (clock and reset generator)
+ 	- 1× MH8228 (system controller and bus driver)
+ 	- 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
+ 	- 2× MHB2114 (SRAM 1024×4b)
+ 	- 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
+ 	- 1× MHB8255A (programmable peripheral interface)
+ 	- 1× MH1082 (decoder and driver of 7-segment LED display)
+ 	- 1× MH7400 (4× NAND)
+ - Power supply
+ 	- external: +5V, -5V, 12V
 
 ## Description of MONITOR operating system
 
