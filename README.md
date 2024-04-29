@@ -18,7 +18,10 @@ Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=2458120
  	- 1× MH1082 (decoder and driver of 7-segment LED display)
  	- 1× MH7400 (4× NAND)
  - Power supply
- 	- external: +5V, -5V, 12V
+ 	- external: +5V (V<sub>CC</sub>), -5V (V<sub>BB</sub>), 12V (V<sub>DD</sub>)
+> [!CAUTION] <br>
+> -5V must be the first power source connected and the last disconnected. <br>
+> +12V must be the last connected and first disconnected power source.
 
 ## Description of MONITOR operating system
 
