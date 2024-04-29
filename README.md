@@ -1,8 +1,8 @@
-# Educational single-board computer PMI-80
+# Replica of Educational single-board computer PMI-80
 
 PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
 
-<img src="docs/PMI-80.jpg" height="300" />
+<img src="img/PMI-80.jpg" height="300" />
 
 Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=24581204
 
@@ -19,7 +19,7 @@ Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=2458120
  	- 1× MH7400 (4× NAND)
  - Power supply
  	- external: +5V (V<sub>CC</sub>), -5V (V<sub>BB</sub>), 12V (V<sub>DD</sub>)
-> [!CAUTION] <br>
+> **Caution** <br>
 > -5V must be the first power source connected and the last disconnected. <br>
 > +12V must be the last connected and first disconnected power source.
 
@@ -37,11 +37,11 @@ The RWM is divided to two areas:
 On the following image is the memory map:
 
 
-![Memory map](docs/memory_map.png)
+![Memory map](img/memory_map.png)
 
 Figure 1. PMI-80 Memory map and some MONITOR variables
 
-<img src="docs/character_table.png" height="200" />
+<img src="img/character_table.png" height="200" />
 
 Table 1. Character codes saved in MONITOR
 
@@ -62,12 +62,12 @@ When you press the `RE` key the system is initialized. Processor 8080A starts by
 <!---
 ![Memory map](docs/display_init.png)
 --->
-<img src="docs/display_init.png" height="30" />
+<img src="img/display_init.png" height="30" />
 
 
 The message can be confirmed by pressing any key. Then the '?' sign appears, which means that the **MONITOR** is ready to accept a command.
 
-<img src="docs/display_question_sign.png" height="30" />
+<img src="img/display_question_sign.png" height="30" />
 
 
 ### `INT` - external interrupt
@@ -83,13 +83,13 @@ Command:
 
 With `R` command you can view or modify the content of CPU registers. When the command is issued the following display should appear:
 
-<img src="docs/display_reg_sign.png" height="30" />
+<img src="img/display_reg_sign.png" height="30" />
 
 Now you can press `A`, `B`, `D`, `8` or `9` to display the content of corresponding register pair AF, BC, DE, HL, SP. Now you can also modify the register pair. By pressing `=` key you finish the current register pair operations and advance to the following register pair. After the SP register manipulation and pressing `=` the MONITOR enters the command waiting state with '?' display.
 
 Example - registers examination and modification of BC to value 0x48AE:
 
-<img src="docs/display_example_reg.png" height="400" />
+<img src="img/display_example_reg.png" height="400" />
 
 ### `MEM` - memory modification
 
@@ -99,7 +99,7 @@ Command:
 
 With `M` command you can view or modify the content of the memory space. When the command is issued the following display should appear:
 
-<img src="docs/display_mem_sign.png" height="30" />
+<img src="img/display_mem_sign.png" height="30" />
 
 Next to the 'M' is displayed the last address. Now you can enter a new address or keep the current. By pressing `=` key you confirm the address and you can modify the value. Press `=` to store new data and go to the next address and modify data or skip to the next address by pressing `=`.
 
@@ -119,7 +119,7 @@ Enter the following code to address 0x1C00. This code will also be used in the f
 ```
 
 
-<img src="docs/display_example_mem.png" height="600" />
+<img src="img/display_example_mem.png" height="600" />
 
 ### `GO` - program execution
 
@@ -129,12 +129,12 @@ Command:
 
 With `EX` command you can execute the program saved in RWM or ROM memory. When the command is issued the following display should appear:
 
-<img src="docs/display_ex_sign.png" height="30" />
+<img src="img/display_ex_sign.png" height="30" />
 
 Now you can modify the address field like in the previous example and then press `=`. 
 If you enter address 0x1C00 (and you have entered the code from the previous example) then the display clears and `E` is displayed in the left corner. The processor left the MONITOR and is executing user code. It is possible to return from this state by pressing `RE` or `I` (if it is enabled and the interrupt vector is entered). 
 
-<img src="docs/display_example_ex.png" height="150" />
+<img src="img/display_example_ex.png" height="150" />
 
 ## MONITOR subroutines accesible by the user
 
