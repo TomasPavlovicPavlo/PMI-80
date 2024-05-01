@@ -1,33 +1,74 @@
-# Replica of Educational single-board computer PMI-80
+# Replica of single-board computer PMI-80
 
-PMI-80 was a fomous educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
+<!--
+<p align="center">
+<img src="img/PMI-80_replica_1.JPEG" height="500" />
+</p>
+-->
 
-<img src="img/PMI-80.jpg" height="300" />
+![PMI-80](img/PMI-80_replica_1.JPEG)
 
-Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=24581204
+The template for this replica was educational single-board computer from former Czechoslovakian republic produced in the 80s by Tesla company. I tried to use as many original Tesla parts as possible. The keyboard used in original was modified calculator keyboard from OKU-205. It is not possible to obtain it so I designed my own keyboard from two PCB, bottom with switches and top as a overlay. The replica also contains original MONITOR software. THe power supply must provide tree voltages +5V, -5V and +12V which is common for 8080 designs.
 
-## Features
-- Integrated circuits:
-	 - 1× MHB8080A (microprocessor, equivalent of Intel 8080)
- 	- 1× MH8224 (clock and reset generator)
- 	- 1× MH8228 (system controller and bus driver)
- 	- 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
- 	- 2× MHB2114 (SRAM 1024×4b)
- 	- 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
- 	- 1× MHB8255A (programmable peripheral interface)
- 	- 1× MH1082 (decoder and driver of 7-segment LED display)
- 	- 1× MH7400 (4× NAND)
- - Power supply
- 	- external: +5V (V<sub>CC</sub>), -5V (V<sub>BB</sub>), 12V (V<sub>DD</sub>)
+## Table of contents
+
+* [About the original](#About-the-original)
+	* [Features](#features)
+* [MONITOR operating system](#MONITOR-operating-system)
+	* [Memory and interface addressing](#memory-and-interface-addressing)
+	* [MONITOR commands](#monitor-commands)
+		* [Command  definition syntax](#command-definition-syntax)
+		* [`RE` - system initialization (RESET)](#re---system-initialization-reset)
+		* [`INT` - external interrupt](#int---external-interrupt)
+		* [`REG` - CPU registers modification](#reg---cpu-registers-modification)
+		* [`MEM` - memory modification](#mem---memory-modification)
+		* [`GO` - program execution](#go---program-execution)
+	* [MONITOR subroutines accesible by the user](#monitor-subroutines-accesible-by-the-user)
+		* [`CLEAR` address 0x00AB](#clear-address-0x00ab)
+		* [`ENTRY` address 0x0008](#entry-address-0x0008)
+		* [`TIN` address 0x0300](#tin-address-0x0300)
+
+
+## About the original
+
+PMI-80 was educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
+
+<p align="center">
+<img src="img/PMI-80.jpg" height="500" />
+</p>
+
+<div style="text-align: center">Original PMI-80, source: https://commons.wikimedia.org/w/index.php?curid=24581204</div>
+
+
+
+### Features
+* Integrated circuits:
+	* 1× MHB8080A (microprocessor, equivalent of Intel 8080)
+ 	* 1× MH8224 (clock and reset generator)
+ 	* 1× MH8228 (system controller and bus driver)
+ 	* 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
+ 	* 2× MHB2114 (SRAM 1024×4b)
+ 	* 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
+ 	* 1× MHB8255A (programmable peripheral interface)
+ 	* 1× MH1082 (decoder and driver of 7-segment LED display)
+ 	* 1× MH7400 (4× NAND)
+ * Power supply
+ 	* external: +5V (V<sub>CC</sub>), -5V (V<sub>BB</sub>), 12V (V<sub>DD</sub>)
 > **Caution** <br>
 > -5V must be the first power source connected and the last disconnected. <br>
 > +12V must be the last connected and first disconnected power source.
 
-## Description of MONITOR operating system
+## MONITOR operating system
 
-MONITOR OS 
+MONITOR is saved in 1kB PROM.
 
-## Memory and interface addressing
+* system inicialisation
+* register view/edit
+* memory view/edit
+* execution of user code
+*
+
+### Memory and interface addressing
 
 Chip select signals CS0, CS1 and CS7 are used to select onboard memories. CS0 selects ROM with MONITOR, CS1 selects user ROM and CS7 selects RWM.
 The RWM is divided to two areas:
@@ -45,18 +86,18 @@ Figure 1. PMI-80 Memory map and some MONITOR variables
 
 Table 1. Character codes saved in MONITOR
 
-## MONITOR commands
+### MONITOR commands
 
 Keys `RE` and `I` are directly connected to hardware, they do not generate any key code.
 
-### Command  definition syntax
+#### Command  definition syntax
 
 - parameters in **< >** are mandatory
 - parameter **address** is 2 bytes long memory address entered in hexadecimal
 - parameter **data** is 1 byte long in hexadecimal
 - parameters in **<( )>** are optional
 
-### `RE` - system initialization (RESET)
+#### `RE` - system initialization (RESET)
 When you press the `RE` key the system is initialized. Processor 8080A starts by reading instruction on address 0000h which means that **MONITOR** starts. **MONITOR** initializes, sets the stack pointer to the top and displays a welcome message:
 
 <!---
@@ -70,12 +111,12 @@ The message can be confirmed by pressing any key. Then the '?' sign appears, whi
 <img src="img/display_question_sign.png" height="30" />
 
 
-### `INT` - external interrupt
+#### `INT` - external interrupt
 
 By pressing the key `INT` you request an external interrupt. If the external interrupt is enabled the processor jumps to the address 0x0038 and saves the return address to the stack (like by instruction 'RST 7').
 On the address 0x0038 is a jump instruction to the address 0x1FE6 where the user must place its own interrupt vector to the interrupt routine. There are 3 bytes left for this vector.
 
-### `REG` - CPU registers modification
+#### `REG` - CPU registers modification
 
 Command:
 
@@ -91,7 +132,7 @@ Example - registers examination and modification of BC to value 0x48AE:
 
 <img src="img/display_example_reg.png" height="400" />
 
-### `MEM` - memory modification
+#### `MEM` - memory modification
 
 Command:
 
@@ -121,7 +162,7 @@ Enter the following code to address 0x1C00. This code will also be used in the f
 
 <img src="img/display_example_mem.png" height="600" />
 
-### `GO` - program execution
+#### `GO` - program execution
 
 Command:
 
@@ -136,7 +177,7 @@ If you enter address 0x1C00 (and you have entered the code from the previous exa
 
 <img src="img/display_example_ex.png" height="150" />
 
-## MONITOR subroutines accesible by the user
+### MONITOR subroutines accesible by the user
 
 MONITOR contains subroutines accessible to the user, i.e. they can be called from the user code. All the MONITOR subroutines are called by the instruction CALL. Subroutines are listed in the following table.
 
@@ -158,7 +199,7 @@ Table 2. List of MONITOR subroutines
 <img src="docs/subprograms.png" height="250" />
 --->
 
-### `CLEAR` address 0x00AB
+#### `CLEAR` address 0x00AB
 
 This subroutine clears 9 bytes wide output buffer and writes one character to the 1st position of the display. The character must be stored in accumulator before calling CLEAR subroutine. Display buffer pointer is stored on address 0x1FFC.
 
@@ -184,11 +225,11 @@ Solution:
 	CALL	CLEAR
 ```
 
-### `ENTRY` address 0x0008
+#### `ENTRY` address 0x0008
 
 This subroutine 
 
-### `TIN` address 0x0300
+#### `TIN` address 0x0300
 
 This subroutine is used for reading one byte from tape recorder to the register C.
 
