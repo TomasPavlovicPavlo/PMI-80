@@ -1,5 +1,7 @@
 # Replica of single-board computer PMI-80
 
+> this document is still a draft
+
 <!--
 <p align="center">
 <img src="img/PMI-80_replica_1.JPEG" height="500" />
@@ -14,6 +16,7 @@ The template for this replica was educational single-board computer from former 
 
 * [About the original](#About-the-original)
 	* [Features](#features)
+* [Assembly procedure](#assembly-procedure)
 * [MONITOR operating system](#MONITOR-operating-system)
 	* [Memory and interface addressing](#memory-and-interface-addressing)
 	* [MONITOR commands](#monitor-commands)
@@ -57,6 +60,21 @@ PMI-80 was educationl computer produced by Tesla Piešťany, Czechoslovakia sinc
 > **Caution** <br>
 > -5V must be the first power source connected and the last disconnected. <br>
 > +12V must be the last connected and first disconnected power source.
+
+## Assembly procedure
+
+This computer is delivered as a Kit so you must assembly it yourself.
+
+I recommend this order of soldering parts to main PCB:
+
+* all sockets for IOs
+* diodes, transistors and crystal
+* resistors and capacitors
+* use short wires to mount LCD display
+* solder all 25 switches to the bottom keyboard PCB
+* use small wires to mount bottom keyboard PCB to main board (first and last should be longer)
+* mount keyboard overlay to first and last wire
+
 
 ## MONITOR operating system
 
