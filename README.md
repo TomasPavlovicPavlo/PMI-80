@@ -10,7 +10,7 @@
 
 ![PMI-80](img/PMI-80_replica_1.JPEG)
 
-The template for this replica was educational single-board computer from former Czechoslovakian republic produced in the 80s by Tesla company. I tried to use as many original Tesla parts as possible. The keyboard used in original was modified calculator keyboard from OKU-205. It is not possible to obtain it so I designed my own keyboard from two PCB, bottom with switches and top as a overlay. The replica also contains original MONITOR software. THe power supply must provide tree voltages +5V, -5V and +12V which is common for 8080 designs.
+The template for this replica was an educational single-board computer from the former Czechoslovakian Republic produced in the 80s by Tesla company. I tried to use as many original Tesla parts as possible. The keyboard used in the original was a modified calculator keyboard from OKU-205. It is not possible to obtain it so I designed my own keyboard from two PCBs, bottom with switches and top as an overlay. The replica also contains the original MONITOR software. The power supply must provide tree voltages +5V, -5V and +12V which is common for 8080 designs.
 
 ## Table of contents
 
@@ -34,7 +34,7 @@ The template for this replica was educational single-board computer from former 
 
 ## About the original
 
-PMI-80 was educationl computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. Clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
+PMI-80 was educational computer produced by Tesla Piešťany, Czechoslovakia since 1982. It was based on MHB8080A, the clone of Intel 8080. It used 9 digit 7-segment LED display and 25 key hexadecimal keypad. The clock frequency was 1.111 MHz. It had 1kB of ROM with "operating system" MONITOR. It was possible to add another 1kB of user ROM. Next it contained 1kB of RWM (Read–write memory).
 
 <p align="center">
 <img src="img/PMI-80.jpg" height="500" />
@@ -49,7 +49,7 @@ PMI-80 was educationl computer produced by Tesla Piešťany, Czechoslovakia sinc
 	* 1× MHB8080A (microprocessor, equivalent of Intel 8080)
  	* 1× MH8224 (clock and reset generator)
  	* 1× MH8228 (system controller and bus driver)
- 	* 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip sellects)
+ 	* 1× MH3205 (3 to 8 decoder, equivalent of 74LS138, used for chip selects)
  	* 2× MHB2114 (SRAM 1024×4b)
  	* 1× MHB8608 (PROM 1024×8b) or MHB8708 (EPROM 1024×8b)
  	* 1× MHB8255A (programmable peripheral interface)
@@ -63,20 +63,20 @@ PMI-80 was educationl computer produced by Tesla Piešťany, Czechoslovakia sinc
 
 ## Assembly procedure
 
-This computer is delivered as a Kit so you must assembly it yourself.
+This computer is delivered as a Kit so you must assemble it yourself.
 
-I recommend this order of soldering parts to main PCB:
+I recommend this order of soldering parts to the main PCB:
 
 * all sockets for IOs
 * diodes, transistors and crystal
 * resistors and capacitors
-* use short wires to mount LCD display
+* use short wires to mount LED display
 
 	<img src="img/asmbl_disp_01.jpg" height="200" />
 
 * Keyboard
 	* solder all 25 switches to the bottom keyboard PCB
-	* insert and solder extracted pins to main board
+	* insert and solder extracted pins to the main board
 
 		<img src="img/asmbl_kb_01.jpg" height="200" />
 	
@@ -92,7 +92,7 @@ I recommend this order of soldering parts to main PCB:
 
 		<img src="img/asmbl_kb_04.jpg" height="200" />
 
-* short pins 1 to 9 according to the silkscreen on main PCB 
+* short pins 1 to 9 according to the silkscreen on the main PCB 
 
 	<img src="img/asmbl_pins_01.jpg" height="200" />
 
@@ -106,7 +106,7 @@ I recommend this order of soldering parts to main PCB:
 
 MONITOR is saved in 1kB PROM.
 
-* system inicialisation
+* system initialisation
 * register view/edit
 * memory view/edit
 * execution of user code
@@ -115,7 +115,7 @@ MONITOR is saved in 1kB PROM.
 ### Memory and interface addressing
 
 Chip select signals CS0, CS1 and CS7 are used to select onboard memories. CS0 selects ROM with MONITOR, CS1 selects user ROM and CS7 selects RWM.
-The RWM is divided to two areas:
+The RWM is divided into two areas:
  - 0x1C00 to 0x1FD8 for user
  - 0x1FD9 to 0x1FFF is reserved for MONITOR
 
@@ -245,7 +245,7 @@ Table 2. List of MONITOR subroutines
 
 #### `CLEAR` address 0x00AB
 
-This subroutine clears 9 bytes wide output buffer and writes one character to the 1st position of the display. The character must be stored in accumulator before calling CLEAR subroutine. Display buffer pointer is stored on address 0x1FFC.
+This subroutine clears 9-bytes wide output buffer and writes one character to the 1st position of the display. The character must be stored in the accumulator before calling CLEAR subroutine. THe display buffer pointer is stored on address 0x1FFC.
 
  - **Input:** 
  	- A = character to be displayed (according to the Table 1.)
@@ -259,7 +259,7 @@ This subroutine clears 9 bytes wide output buffer and writes one character to th
 
 Example:
 
-Output buffer is located on address 0x1D00. Clear it and print character 'P' on first position.
+The output buffer is located at address 0x1D00. Clear it and print the character 'P' on first position.
 
 Solution:
 ```
@@ -275,7 +275,7 @@ This subroutine
 
 #### `TIN` address 0x0300
 
-This subroutine is used for reading one byte from tape recorder to the register C.
+This subroutine is used for reading one byte from the tape recorder to register C.
 
  - **Input:** 
  	- data from tape recorder
