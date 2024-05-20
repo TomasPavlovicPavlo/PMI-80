@@ -71,10 +71,36 @@ I recommend this order of soldering parts to main PCB:
 * diodes, transistors and crystal
 * resistors and capacitors
 * use short wires to mount LCD display
-* solder all 25 switches to the bottom keyboard PCB
-* use small wires to mount bottom keyboard PCB to main board (first and last should be longer)
-* mount keyboard overlay to first and last wire
 
+	<img src="img/asmbl_disp_01.jpg" height="200" />
+
+* Keyboard
+	* solder all 25 switches to the bottom keyboard PCB
+	* insert and solder extracted pins to main board
+
+		<img src="img/asmbl_kb_01.jpg" height="200" />
+	
+	* mount bottom keyboard PCB to pins
+
+		<img src="img/asmbl_kb_02.jpg" height="200" />
+
+	* cut all pins except the outer ones
+
+		<img src="img/asmbl_kb_03.jpg" height="200" />
+
+	* mount the upper PCB
+
+		<img src="img/asmbl_kb_04.jpg" height="200" />
+
+* short pins 1 to 9 according to the silkscreen on main PCB 
+
+	<img src="img/asmbl_pins_01.jpg" height="200" />
+
+* connect power source with 5V, -5V and 12V
+
+> **Caution** <br>
+> -5V must be the first power source connected and the last disconnected. <br>
+> +12V must be the last connected and first disconnected power source.
 
 ## MONITOR operating system
 
