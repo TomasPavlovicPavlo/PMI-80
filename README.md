@@ -106,6 +106,10 @@ I recommend this order of soldering parts to the main PCB:
 
 MONITOR is saved in 1kB PROM.
 
+Here is the [source code](Firmware/pmi80.asm) of MONITOR.
+
+Main features:
+
 * system initialisation
 * register view/edit
 * memory view/edit
