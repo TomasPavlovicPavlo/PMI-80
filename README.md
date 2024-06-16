@@ -55,8 +55,11 @@ PMI-80 was educational computer produced by Tesla Piešťany, Czechoslovakia sin
  	* 1× MHB8255A (programmable peripheral interface)
  	* 1× MH1082 (decoder and driver of 7-segment LED display)
  	* 1× MH7400 (4× NAND)
- * Power supply
- 	* external: +5V (V<sub>CC</sub>), -5V (V<sub>BB</sub>), 12V (V<sub>DD</sub>)
+ * Power supply (external)
+ 	* +5V (V<sub>CC</sub>), 600mA
+	* -5V (V<sub>BB</sub>), 20mA
+	* +12V (V<sub>DD</sub>), 90mA
+
 > **Caution** <br>
 > -5V must be the first power source connected and the last disconnected. <br>
 > +12V must be the last connected and first disconnected power source.
