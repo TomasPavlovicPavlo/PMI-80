@@ -228,6 +228,18 @@ If you enter address 0x1C00 (and you have entered the code from the previous exa
 
 <img src="img/display_example_ex.png" height="150" />
 
+#### `LOAD` - read data from tape
+
+Command:
+
+`L` \<(address)\> `=` \<data\> `=` `=`
+
+By pressing `L` keyboard
+
+tbd
+
+
+
 ### MONITOR subroutines accesible by the user
 
 MONITOR contains subroutines accessible to the user, i.e. they can be called from the user code. All the MONITOR subroutines are called by the instruction CALL. Subroutines are listed in the following table.
