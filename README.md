@@ -26,10 +26,20 @@ The template for this replica was an educational single-board computer from the 
 		* [`REG` - CPU registers modification](#reg---cpu-registers-modification)
 		* [`MEM` - memory modification](#mem---memory-modification)
 		* [`GO` - program execution](#go---program-execution)
+		* [`BREAK` - program pause](#break---program-pause)
+		* [`LOAD` - read data from tape](#load---read-data-from-tape)
+		* [`SAVE` - save data to tape](#load---read-data-from-tape)
+	* [MONITOR messages](#monitor-messages)
 	* [MONITOR subroutines accesible by the user](#monitor-subroutines-accesible-by-the-user)
 		* [`CLEAR` address 0x00AB](#clear-address-0x00ab)
 		* [`ENTRY` address 0x0008](#entry-address-0x0008)
 		* [`TIN` address 0x0300](#tin-address-0x0300)
+		* [`TOUT` address 0x02D4](#tout-address-0x02D4)
+		* [`OUTDA` address 0x00F2](#outda-address-0x00F2)
+		* [`OUTAD` address 0x00BB](#outad-address-0x00BB)
+		* [`MODDA` address 0x00FB](#modda-address-0x00FB)
+		* [`MODAD` address 0x00D7](#modad-address-0x00D7)
+		* [`OUTKE` address 0x0116](#outke-address-0x0116)
 
 
 ## About the original
@@ -228,17 +238,28 @@ If you enter address 0x1C00 (and you have entered the code from the previous exa
 
 <img src="img/display_example_ex.png" height="150" />
 
+
+#### `BREAK` - program pause
+
+tbd
+
 #### `LOAD` - read data from tape
 
 Command:
 
 `L` \<(address)\> `=` \<data\> `=` `=`
 
-By pressing `L` keyboard
+Press the `L` key to call the subprogram which reads data from magnetic tape (terminal IN). After pressing `L` key you should enter the address to which the data will be stored. If the address is not entered then the data will be stored to the address in PC. 
 
 tbd
 
+#### `SAVE` - save data to tape
 
+tbd
+
+### MONITOR messages
+
+tbd
 
 ### MONITOR subroutines accesible by the user
 
@@ -290,7 +311,8 @@ Solution:
 
 #### `ENTRY` address 0x0008
 
-This subroutine 
+tbd
+
 
 #### `TIN` address 0x0300
 
@@ -304,6 +326,33 @@ This subroutine is used for reading one byte from the tape recorder to register 
 
  - **Used registers:** 
  	- BC, DE, A
+
+#### `TOUT` address 0x02D4
+
+tbd 
+
+#### `OUTDA` address 0x00F2
+
+tbd
+
+
+#### `OUTAD` address 0x00BB
+
+tbd
+
+#### `MODDA` address 0x00FB
+
+tbd
+
+#### `MODAD` address 0x00D7
+
+tbd
+
+#### `OUTKE` address 0x0116
+
+tbd
+
+
 
 
 
