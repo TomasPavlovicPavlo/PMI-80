@@ -117,9 +117,11 @@ I recommend this order of soldering parts to the main PCB:
 
 ## MONITOR operating system
 
-MONITOR is saved in 1kB PROM.
+MONITOR is saved in 1kB PROM MHB8708 (IO4).
 
 Here is the [source code](Firmware/pmi80.asm) of MONITOR.
+
+It provides control and user interface of PMI-80.
 
 Main features:
 
@@ -127,9 +129,11 @@ Main features:
 * register view/edit
 * memory view/edit
 * execution of user code
-*
+* data save and load to/from magnetic tape
 
-### Memory and interface addressing
+Moreover, it contains some user-accesible subroutines like keyboard input, display output and others. As an in/out interface MONITOR uses a 5x5 keyboard and 9-digit LED display which are controlled through a Programmable peripheral interface MHB8255A.
+
+### Memory and peripheral interfaces addressing
 
 Chip select signals CS0, CS1 and CS7 are used to select onboard memories. CS0 selects ROM with MONITOR, CS1 selects user ROM and CS7 selects RWM.
 The RWM is divided into two areas:
@@ -142,6 +146,12 @@ On the following image is the memory map:
 ![Memory map](img/memory_map.png)
 
 Figure 1. PMI-80 Memory map and some MONITOR variables
+
+As output interface 7-segment 9-digit LED display is used. The leftmost digit is numbered 0 and the rightmost 8. For addres positions 2, 3, 4 and 5 are used. For data positions 7 and 8. Position 0 is used for displaying the current function. Figure 2. shows which output lines of MHB8255A are used for segments.
+
+<img src="img/7_segment.png" height="150" />
+
+Figure 2. Assignment of segments to MHB8255A
 
 <img src="img/character_table.png" height="200" />
 
